@@ -10,7 +10,6 @@ import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -29,8 +28,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     public static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
 
-    //If you change list count of supported locales, you should also change
-    // SUPPORTED_LOCALE_COUNT in ValidPasswordValidatorTest
     public static final List<Locale> SUPPORTED_LOCALES = Arrays.asList(
             DEFAULT_LOCALE
     );
@@ -45,13 +42,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     private static final List<String> MESSAGES = List.of(
             "validation",
-            "errors",
-            "mail",
-            "messages"
+            "errors"
     );
 
     private static final List<String> SQL_INIT_SCRIPTS = List.of(
-            "data-roles.sql"
+            "data-roles.sql",
+            "data-users.sql"
     );
 
     @Override
@@ -113,28 +109,5 @@ public class WebConfig implements WebMvcConfigurer {
         sourceInitializer.setDatabasePopulator(resourceDbPopulator);
         return sourceInitializer;
     }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/frontend/");
-    }
-
-    /**
-     * Bean for email template resolver.
-     *
-     * @return ClassLoaderTemplateResolver for email templates
-     */
-    //    @Bean
-    //    public ClassLoaderTemplateResolver emailTemplateResolver() {
-    //        ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
-    //        emailTemplateResolver.setPrefix("mail/");
-    //        emailTemplateResolver.setSuffix(".html");
-    //        emailTemplateResolver.setTemplateMode(TemplateMode.HTML);
-    //        emailTemplateResolver.setCharacterEncoding("UTF-8");
-    //        emailTemplateResolver.setOrder(0);
-    //        emailTemplateResolver.setCheckExistence(true);
-    //
-    //        return emailTemplateResolver;
-    //    }
 
 }

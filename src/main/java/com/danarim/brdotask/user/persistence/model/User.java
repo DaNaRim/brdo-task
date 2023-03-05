@@ -54,11 +54,8 @@ public class User implements UserDetails {
     /**
      * Creates a new user entity.
      *
-     * @param firstName        first name of the user
-     * @param lastName         last name of the user
      * @param email            email of the user
      * @param password         password of the user
-     * @param registrationDate registration date of the user
      * @param roles            roles of the user
      */
     public User(String email, String password, Set<Role> roles) {

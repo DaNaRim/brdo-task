@@ -11,6 +11,16 @@
     text-align: center;
   }
 
+  .hint {
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+
+    > span {
+      font-weight: 600;
+    }
+  }
+
   .app_message {
     width: 20rem;
     margin: 1rem 0;

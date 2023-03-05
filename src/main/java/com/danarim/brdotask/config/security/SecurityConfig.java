@@ -35,14 +35,6 @@ public class SecurityConfig {
             "/logout",
             "/auth/getState",
             "/auth/refresh"
-//
-//            "/registration",
-//            "/registrationConfirm",
-//            "/resendVerificationToken",
-//
-//            "/resetPassword",
-//            "/resetPasswordConfirm",
-//            "/resetPasswordSet"
     ).map(endpoint -> API_V1_PREFIX + endpoint).toList();
 
     private static final int BCRYPT_STRENGTH = 11;
@@ -71,9 +63,6 @@ public class SecurityConfig {
                         .mvcMatchers(HttpMethod.GET, "/**").permitAll()
                         .anyRequest().authenticated()
                 )
-//                .requiresChannel(channel -> channel
-//                        .anyRequest().requiresSecure()
-//                )
                 .csrf().disable() //csrf handles by CustomAuthorizationFilter
                 .sessionManagement(sessionConfigurer -> sessionConfigurer
                         .sessionCreationPolicy(STATELESS)

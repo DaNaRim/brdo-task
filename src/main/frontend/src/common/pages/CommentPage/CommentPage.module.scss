@@ -1,0 +1,32 @@
+.loading {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.commentsWrapper {
+  padding: 1em;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+
+  .comment {
+    padding: 1em;
+    border: 1px solid #ccc;
+
+    .username {
+      font-weight: bold;
+    }
+
+    .body {
+      margin-top: 1em;
+    }
+
+    .updateAt {
+      font-size: 0.8em;
+      margin-top: 1em;
+      color: #666;
+    }
+  }
+}

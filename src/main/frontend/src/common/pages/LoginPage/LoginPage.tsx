@@ -31,7 +31,7 @@ const LoginPage = () => {
         login(data).unwrap()
             .then(data => dispatch(setCredentials(data)))
             .then(() => {
-                navigate("/");
+                navigate("/comments");
             })
             .catch(e => {
                 setValue("password", "");
@@ -50,6 +50,9 @@ const LoginPage = () => {
     return (
         <main className={styles.login_page}>
             <h1>Login page</h1>
+
+            <p className={styles.hint}>Username: <span>test@test.test</span></p>
+            <p className={styles.hint}>Password: <span>12345678</span></p>
 
             <form onSubmit={handleSubmit(handleLogin)}>
                 <label htmlFor="username">Email: </label>
@@ -74,7 +77,6 @@ const LoginPage = () => {
                     ? <span>Loading...</span>
                     : <button type="submit">Login</button>
                 }
-                <Link to={"/resetPassword"}>Forgot password?</Link>
             </form>
         </main>
     );

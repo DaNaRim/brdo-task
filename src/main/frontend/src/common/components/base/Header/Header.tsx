@@ -38,8 +38,10 @@ const Header = () => {
     useEffect(() => {
         if (!isAuthInit && !isAuthStateLoading) {
             getAuthState().unwrap()
+                .then(res => {console.log(res); return res})
                 .then(res => dispatch(setCredentials(res)))
                 .catch(() => {
+                    console.log("clearing auth state");
                     logout();
                     dispatch(clearAuthState());
                     dispatch(setInitialized());
@@ -67,6 +69,7 @@ const Header = () => {
             <nav>
                 <ul>
                     <li><NavLink to="/">Home</NavLink></li>
+                    {username && <li><NavLink to="/comments">Comments</NavLink></li>}
                 </ul>
             </nav>
             <div className="logoBlock">

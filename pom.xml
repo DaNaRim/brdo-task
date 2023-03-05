@@ -31,6 +31,7 @@
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
         <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
+        <checkstyle-maven-plugin.version>3.2.1</checkstyle-maven-plugin.version>
 
         <frontend.location>src/main/frontend</frontend.location>
         <it.location>src/it</it.location>
@@ -124,6 +125,8 @@
     </dependencyManagement>
 
     <build>
+        <finalName>test</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -256,6 +259,25 @@
                         <id>verify</id>
                         <goals>
                             <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle-maven-plugin.version}</version>
+                <configuration>
+                    <configLocation>${project.basedir}/checkstyle-rules.xml</configLocation>
+                    <failsOnError>false</failsOnError>
+                    <consoleOutput>true</consoleOutput>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>

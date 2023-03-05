@@ -116,7 +116,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request request where exception occurred.
      *
      * @return body with error message. Not {@link ErrorResponse} because it is not handled by
-     * frontend.
+     *         frontend.
      */
     @ExceptionHandler(TokenExpiredException.class)
     protected ResponseEntity<String> handleTokenExpiredException(TokenExpiredException e,
@@ -139,7 +139,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request request where exception occurred.
      *
      * @return body with error message. Not {@link ErrorResponse} because it is not handled by
-     * frontend.
+     *         frontend.
      */
     @ExceptionHandler(JWTVerificationException.class)
     protected ResponseEntity<String> handleJwtVerificationException(JWTVerificationException e,

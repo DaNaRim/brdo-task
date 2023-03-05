@@ -1,7 +1,7 @@
 import {BaseQueryApi} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 import {createApi, FetchArgs, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {RootState} from "../../app/store";
-import {AuthResponseEntity, clearAuthState, setCredentials, setForceLogin} from "../auth/authSlice";
+import {AuthResponseEntity, clearAuthState, setCredentials} from "../auth/authSlice";
 
 const serverUrl = "/api/v1";
 
@@ -23,8 +23,7 @@ const baseQueryWithReauth = async (args: string | FetchArgs,
     let result = await baseQuery(args, api, extraOptions);
 
     if (result.error?.status === 403) {
-        console.log("Refreshing token");
-        const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
+        const refreshResult = await baseQuery({url: "/auth/refresh", method: "POST"}, api, extraOptions);
 
         if (refreshResult.meta?.response?.status === 200) {
             const authResult = refreshResult.data as AuthResponseEntity;
@@ -32,14 +31,12 @@ const baseQueryWithReauth = async (args: string | FetchArgs,
             api.dispatch(setCredentials(authResult));
             result = await baseQuery(args, api, extraOptions);
 
-        } else if (refreshResult.error?.status === 401) {
+        } else if (refreshResult.meta?.response?.status === 401) {
             await baseQuery("/logout", api, extraOptions);
-
             api.dispatch(clearAuthState());
-            api.dispatch(setForceLogin(true));
 
             window.location.replace("/login");
-        } else if (refreshResult.error?.status === 403) {
+        } else if (refreshResult.meta?.response?.status === 403) {
             window.location.replace("/forbidden");
         } else {
             window.location.replace("/error");

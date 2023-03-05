@@ -5,6 +5,7 @@ import "./App.scss";
 
 const HomePage = React.lazy(() => import("../common/pages/HomePage/HomePage"));
 const LoginPage = React.lazy(() => import("../common/pages/LoginPage/LoginPage"));
+const CommentPage = React.lazy(() => import("../common/pages/CommentPage/CommentPage"));
 
 const ForbiddenPage = React.lazy(() => import("../common/pages/errors/ForbiddenPage/ForbiddenPage"));
 const ErrorPage = React.lazy(() => import("../common/pages/errors/ErrorPage/ErrorPage"));
@@ -15,6 +16,7 @@ const App = () => (
         <Route path="/" element={<PageWrapper/>}>
             <Route path="/" index element={<HomePage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/comments" element={<CommentPage/>}/>
 
             <Route path="/forbidden" element={<ForbiddenPage/>}/>
             <Route path="/error" element={<ErrorPage/>}/>
